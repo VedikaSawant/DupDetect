@@ -8,7 +8,16 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 
 # Load the data
-df = pd.read_csv('questions.csv')
+df1 = pd.read_csv('sample_ques1.csv')
+# Read the subsequent CSV files, skipping the header row
+df2 = pd.read_csv('sample_ques2.csv', skiprows=1, header=None)
+df3 = pd.read_csv('sample_ques3.csv', skiprows=1, header=None)
+
+# Assign column names to the subsequent DataFrames
+df2.columns = df1.columns
+df3.columns = df1.columns
+
+df = pd.concat([df1, df2, df3], ignore_index=True)
 new_df = df.sample(1000, random_state=2)
 
 def common_words(row):
