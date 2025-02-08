@@ -88,12 +88,12 @@ rf = RandomForestClassifier()
 rf.fit(X_train, y_train)
 
 # Streamlit web app
-st.title("Duplicate Question Detector")
+st.title("Question Similarity Detector")
 
 # User input
 st.header("User Input:")
-q1 = st.text_input("Enter Question 1:")
-q2 = st.text_input("Enter Question 2:")
+q1 = st.text_input("Enter Question 1:", placeholder="eg. What is the capital of India?")
+q2 = st.text_input("Enter Question 2:", placeholder="eg. Where is the capital of India?")
 
 # Prediction
 if st.button('Predict') and (q1 and q2):
@@ -114,8 +114,8 @@ if st.button('Predict') and (q1 and q2):
 
     # Display result
     if rf_prediction[0][1] >= 0.5:
-        st.error("These questions are duplicate.")
+        st.error("These questions have the same meaning.")
     else:
-        st.success("These questions are not duplicate.")
+        st.success("These questions do not have the same meaning.")
 elif not q1 or not q2:
     st.info("Please enter both questions to make a prediction.")
